@@ -15,7 +15,7 @@ import okhttp3.Response;
 public class ApiClient {
     public static void getApiResponse(final Activity activity, final RecyclerView recyclerView) {
         Request request = new Request.Builder()
-                .url("http://api.themoviedb.org/3/movie/popular?api_key=")
+                .url("http://api.themoviedb.org/3/movie/popular?api_key=" + BuildConfig.api_key)
                 .build();
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .connectTimeout(15, TimeUnit.SECONDS)
