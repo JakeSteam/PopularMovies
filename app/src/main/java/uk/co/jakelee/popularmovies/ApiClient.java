@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -11,6 +12,7 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import uk.co.jakelee.popularmovies.model.Movie;
 
 public class ApiClient {
     public static void getApiResponse(final Activity activity, final RecyclerView recyclerView) {
@@ -34,10 +36,12 @@ public class ApiClient {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 }
+                final String responseString = response.body().string();
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        recyclerView.setAdapter(new ImageGridAdapter(MainActivity.getMovieList()));
+                        List<Movie> movies = JsonUtils.parseMoviesJson(responseString);
+                        recyclerView.setAdapter(new ImageGridAdapter(movies));
                     }
                 });
             }

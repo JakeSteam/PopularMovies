@@ -1,6 +1,6 @@
 # PopularMovies
 
-To build, add a `themoviedev_api_key` to your `gradle.properties`. 
+To build, add a `themoviedb_api_key` to your `gradle.properties`. 
 
 For example:
 
