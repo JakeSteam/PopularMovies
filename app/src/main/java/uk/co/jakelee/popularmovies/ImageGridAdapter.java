@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import uk.co.jakelee.popularmovies.model.Movie;
@@ -31,12 +33,9 @@ public class ImageGridAdapter extends RecyclerView.Adapter<ImageGridAdapter.Movi
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         final Movie movie = movieList.get(position);
-        /*Picasso.get()
-                .load(R.drawable.ic_launcher_foreground)
-                .centerCrop()
-                .resize(400, 400)
-                .into(holder.imageView);*/
-        holder.imageView.setImageResource(R.drawable.ic_launcher_foreground);
+        Picasso.get()
+                .load(movie.getPoster())
+                .into(holder.imageView);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
