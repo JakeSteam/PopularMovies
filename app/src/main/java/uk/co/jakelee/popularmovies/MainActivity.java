@@ -2,11 +2,13 @@ package uk.co.jakelee.popularmovies;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         movieRecycler = findViewById(R.id.movieRecycler);
         movieRecycler.setHasFixedSize(true);
-        StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         movieRecycler.setLayoutManager(sglm);
         getApiResponse(this, movieRecycler, true);
     }
@@ -60,25 +62,34 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         ApiUtil.httpClient.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                handleApiError(activity, e.getMessage());
             }
 
             @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    throw new IOException("Unexpected code " + response);
+            public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
+                if (!response.isSuccessful() || response.body() == null) {
+                    handleApiError(activity, response.message());
+                    return;
                 }
                 final String responseString = response.body().string();
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        activity.setTitle(popular ? "Popular Films" : "Top Rated Films");
+                        if (popular) {
+                            activity.setTitle(activity.getString(R.string.popular_films));
+                        } else {
+                            activity.setTitle(activity.getString(R.string.top_rated_films));
+                        }
                         List<Movie> movies = JsonUtil.parseMoviesJson(responseString);
                         recyclerView.swapAdapter(new ImageGridAdapter(movies), false);
                     }
                 });
             }
         });
+    }
+
+    private static void handleApiError(Activity activity, String error) {
+        Toast.makeText(activity, error, Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,9 +1,12 @@
 package uk.co.jakelee.popularmovies.utilities;
 
+import android.content.Context;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import uk.co.jakelee.popularmovies.BuildConfig;
+import uk.co.jakelee.popularmovies.R;
 
 public class ApiUtil {
     public static OkHttpClient httpClient = new OkHttpClient.Builder()
@@ -13,12 +16,12 @@ public class ApiUtil {
             .retryOnConnectionFailure(false)
             .build();
 
-    public static String getApiUrl(Boolean usePopular) {
+    public static String getApiUrl(Context context, Boolean usePopular) {
         final String urlPart = usePopular ? "popular" : "top_rated";
-        return "http://api.themoviedb.org/3/movie/" + urlPart + "?api_key=" + BuildConfig.api_key;
+        return String.format(context.getString(R.string.api_url), urlPart, BuildConfig.api_key);
     }
 
-    public static String getPosterUrl(String suffix) {
-        return "https://image.tmdb.org/t/p/w500" + suffix;
+    public static String getPosterUrl(Context context,  String suffix) {
+        return String.format(context.getString(R.string.poster_url), suffix);
     }
 }

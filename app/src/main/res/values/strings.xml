@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Popular Movies</string>
+    <string name="app_name">Jake\'s Popular Movies</string>
+    <string name="popular_films">Popular Films</string>
+    <string name="top_rated_films">Top Rated Films</string>
+    <string name="api_url">http://api.themoviedb.org/3/movie/%1$s?api_key=%2$s</string>
+    <string name="poster_url">https://image.tmdb.org/t/p/w500%s</string>
 </resources>
