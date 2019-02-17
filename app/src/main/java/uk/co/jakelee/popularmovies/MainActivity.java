@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static void getApiResponse(final Activity activity, final RecyclerView recyclerView, final Boolean popular) {
         Request request = new Request.Builder()
-                .url(ApiUtil.getApiUrl(popular))
+                .url(ApiUtil.getApiUrl(activity, popular))
                 .build();
         ApiUtil.httpClient.newCall(request).enqueue(new Callback() {
             @Override

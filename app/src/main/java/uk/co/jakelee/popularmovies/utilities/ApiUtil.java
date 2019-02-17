@@ -17,7 +17,7 @@ public class ApiUtil {
             .build();
 
     public static String getApiUrl(Context context, Boolean usePopular) {
-        final String urlPart = usePopular ? "popular" : "top_rated";
+        final String urlPart = context.getString(usePopular ? R.string.api_url_part_popular : R.string.api_url_part_top_rated);
         return String.format(context.getString(R.string.api_url), urlPart, BuildConfig.api_key);
     }
 

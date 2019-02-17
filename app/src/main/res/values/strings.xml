@@ -4,4 +4,6 @@
     <string name="top_rated_films">Top Rated Films</string>
     <string name="api_url">http://api.themoviedb.org/3/movie/%1$s?api_key=%2$s</string>
     <string name="poster_url">https://image.tmdb.org/t/p/w500%s</string>
+    <string name="api_url_part_popular">popular</string>
+    <string name="api_url_part_top_rated">top_rated</string>
 </resources>

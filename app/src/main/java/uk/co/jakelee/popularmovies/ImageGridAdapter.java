@@ -36,7 +36,7 @@ public class ImageGridAdapter extends RecyclerView.Adapter<ImageGridAdapter.Movi
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         final Movie movie = movieList.get(position);
         Picasso.get()
-                .load(ApiUtil.getPosterUrl(movie.getPoster()))
+                .load(ApiUtil.getPosterUrl(holder.imageView.getContext(), movie.getPoster()))
                 .into(holder.imageView);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
