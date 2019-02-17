@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import uk.co.jakelee.popularmovies.model.Movie;
+import uk.co.jakelee.popularmovies.utilities.ApiUtil;
 
 public class ImageGridAdapter extends RecyclerView.Adapter<ImageGridAdapter.MovieViewHolder> {
 
@@ -35,7 +36,7 @@ public class ImageGridAdapter extends RecyclerView.Adapter<ImageGridAdapter.Movi
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         final Movie movie = movieList.get(position);
         Picasso.get()
-                .load("https://image.tmdb.org/t/p/w500" + movie.getPoster())
+                .load(ApiUtil.getPosterUrl(movie.getPoster()))
                 .into(holder.imageView);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override

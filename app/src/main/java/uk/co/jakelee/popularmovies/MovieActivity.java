@@ -11,6 +11,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import uk.co.jakelee.popularmovies.model.Movie;
+import uk.co.jakelee.popularmovies.utilities.ApiUtil;
 
 public class MovieActivity extends AppCompatActivity {
 
@@ -35,7 +36,7 @@ public class MovieActivity extends AppCompatActivity {
 
     private void populateUI(Movie movie) {
         Picasso.get()
-                .load(movie.getPoster())
+                .load(ApiUtil.getPosterUrl(movie.getPoster()))
                 .into((ImageView) findViewById(R.id.movie_poster));
         ((TextView) findViewById(R.id.title)).setText(movie.getTitle());
         ((TextView) findViewById(R.id.synopsis)).setText(movie.getSynopsis());

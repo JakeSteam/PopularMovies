@@ -1,4 +1,4 @@
-package uk.co.jakelee.popularmovies;
+package uk.co.jakelee.popularmovies.utilities;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,7 +9,7 @@ import java.util.List;
 
 import uk.co.jakelee.popularmovies.model.Movie;
 
-public class JsonUtils {
+public class JsonUtil {
     public static List<Movie> parseMoviesJson(String json) {
         try {
             JSONArray moviesJson = new JSONObject(json).optJSONArray("results");
