@@ -18,7 +18,7 @@ public class ApiUtil {
 
     public static String getApiUrl(Context context, Boolean usePopular) {
         final String urlPart = context.getString(usePopular ? R.string.api_url_part_popular : R.string.api_url_part_top_rated);
-        return String.format(context.getString(R.string.api_url), urlPart, BuildConfig.api_key);
+        return String.format(context.getString(R.string.api_url), urlPart, BuildConfig.API_KEY);
     }
 
     public static String getPosterUrl(Context context,  String suffix) {

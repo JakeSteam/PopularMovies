@@ -6,4 +6,9 @@
     <string name="poster_url">https://image.tmdb.org/t/p/w500%s</string>
     <string name="api_url_part_popular">popular</string>
     <string name="api_url_part_top_rated">top_rated</string>
+    <string name="poster_description">Movie poster</string>
+    <string name="movie_title">Title:</string>
+    <string name="movie_synopsis">Synopsis:</string>
+    <string name="movie_release_date">Release Date:</string>
+    <string name="movie_average_vote">Average Vote:</string>
 </resources>
