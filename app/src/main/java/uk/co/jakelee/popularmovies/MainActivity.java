@@ -33,12 +33,6 @@ public class MainActivity extends AppCompatActivity {
         getApiResponse(this, movieRecycler, true);
     }
 
-    private void launchDetailActivity(int position) {
-        //Intent intent = new Intent(this, MovieActivity.class);
-        //intent.putExtra(DetailActivity.EXTRA_POSITION, position);
-        //startActivity(intent);
-    }
-
     public static void getApiResponse(final Activity activity, final RecyclerView recyclerView, final Boolean popular) {
         final String urlPart = popular ? "popular" : "top_rated";
         Request request = new Request.Builder()
@@ -65,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        activity.setTitle(urlPart);
+                        activity.setTitle(popular ? "Popular Films" : "Top Rated Films");
                         List<Movie> movies = JsonUtils.parseMoviesJson(responseString);
                         recyclerView.setAdapter(new ImageGridAdapter(movies));
                     }

@@ -1,6 +1,8 @@
 package uk.co.jakelee.popularmovies.model;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable {
     private Integer id;
     private String title;
     private String releaseDate;
