@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
@@ -52,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         movieRecycler.setHasFixedSize(true);
         StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         movieRecycler.setLayoutManager(sglm);
-        movieRecycler.setAdapter(new ImageGridAdapter(new ArrayList<Movie>()));
         getApiResponse(this, movieRecycler, true);
     }
 
@@ -77,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         activity.setTitle(popular ? "Popular Films" : "Top Rated Films");
                         List<Movie> movies = JsonUtil.parseMoviesJson(responseString);
-                        recyclerView.setAdapter(new ImageGridAdapter(movies));
+                        recyclerView.swapAdapter(new ImageGridAdapter(movies), false);
                     }
                 });
             }
