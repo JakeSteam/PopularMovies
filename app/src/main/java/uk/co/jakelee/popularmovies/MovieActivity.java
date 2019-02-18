@@ -38,6 +38,8 @@ public class MovieActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.title)).setText(movie.getTitle());
         ((TextView) findViewById(R.id.synopsis)).setText(movie.getSynopsis());
         ((TextView) findViewById(R.id.release_date)).setText(movie.getReleaseDate());
-        ((TextView) findViewById(R.id.average_vote)).setText(movie.getVoteAverage().toString());
+        ((TextView) findViewById(R.id.average_vote)).setText(String.format(
+                getString(R.string.average_vote_format),
+                movie.getVoteAverage()));
     }
 }
