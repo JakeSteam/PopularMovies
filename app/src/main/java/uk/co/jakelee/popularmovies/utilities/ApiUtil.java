@@ -9,10 +9,11 @@ import uk.co.jakelee.popularmovies.BuildConfig;
 import uk.co.jakelee.popularmovies.R;
 
 public class ApiUtil {
+    private static int TIMEOUT_SECONDS = 20;
     public static OkHttpClient httpClient = new OkHttpClient.Builder()
-            .connectTimeout(15, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .retryOnConnectionFailure(false)
             .build();
 
