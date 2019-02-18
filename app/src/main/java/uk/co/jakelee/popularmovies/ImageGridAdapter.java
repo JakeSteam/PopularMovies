@@ -18,7 +18,7 @@ import uk.co.jakelee.popularmovies.utilities.ApiUtil;
 
 public class ImageGridAdapter extends RecyclerView.Adapter<ImageGridAdapter.MovieViewHolder> {
 
-    private List<Movie> movieList;
+    private final List<Movie> movieList;
 
     ImageGridAdapter(List<Movie> movieList) {
         this.movieList = movieList;
@@ -58,7 +58,7 @@ public class ImageGridAdapter extends RecyclerView.Adapter<ImageGridAdapter.Movi
     }
 
     static class MovieViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+        final ImageView imageView;
 
         MovieViewHolder(View view) {
             super(view);

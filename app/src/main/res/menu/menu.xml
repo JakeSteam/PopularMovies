@@ -6,14 +6,12 @@
     <item
         android:id="@+id/action_popular"
         android:orderInCategory="200"
-        android:title="Popular"
         android:icon="@drawable/ic_popular"
-        app:showAsAction="ifRoom" />
+        android:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_toprated"
         android:orderInCategory="300"
-        android:title="Top Rated"
         android:icon="@drawable/ic_toprated"
-        app:showAsAction="ifRoom" />
+        android:showAsAction="ifRoom" />
 
 </menu>
