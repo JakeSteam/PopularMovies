@@ -88,7 +88,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private static void handleApiError(Activity activity, String error) {
-        Toast.makeText(activity, error, Toast.LENGTH_SHORT).show();
+    private static void handleApiError(final Activity activity, final String error) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(activity, error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
