@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         getApiResponse(this, movieRecycler, true);
     }
 
-    public static void getApiResponse(final Activity activity, final RecyclerView recyclerView, final Boolean popular) {
+    public void getApiResponse(final Activity activity, final RecyclerView recyclerView, final Boolean popular) {
         Request request = new Request.Builder()
                 .url(ApiUtil.getApiUrl(activity, popular))
                 .build();

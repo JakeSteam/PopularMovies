@@ -13,6 +13,7 @@ public class JsonUtil {
 
     public static List<Movie> parseMoviesJson(String json) {
         String RESULTS_ARRAY = "results";
+        String MOVIE_IS_ADULT = "adult";
         String MOVIE_ID = "id";
         String MOVIE_TITLE = "title";
         String MOVIE_RELEASE = "release_date";
@@ -24,14 +25,16 @@ public class JsonUtil {
             JSONArray moviesJson = new JSONObject(json).optJSONArray(RESULTS_ARRAY);
             for (int i = 0; i < moviesJson.length(); i++) {
                 JSONObject movieJson = moviesJson.getJSONObject(i);
-                movies.add(new Movie(
-                        movieJson.optInt(MOVIE_ID),
-                        movieJson.optString(MOVIE_TITLE),
-                        movieJson.optString(MOVIE_RELEASE),
-                        movieJson.optString(MOVIE_POSTER),
-                        movieJson.optDouble(MOVIE_VOTE),
-                        movieJson.optString(MOVIE_OVERVIEW)
-                ));
+                if (!movieJson.optBoolean(MOVIE_IS_ADULT)) {
+                    movies.add(new Movie(
+                            movieJson.optInt(MOVIE_ID),
+                            movieJson.optString(MOVIE_TITLE),
+                            movieJson.optString(MOVIE_RELEASE),
+                            movieJson.optString(MOVIE_POSTER),
+                            movieJson.optDouble(MOVIE_VOTE),
+                            movieJson.optString(MOVIE_OVERVIEW)
+                    ));
+                }
             }
             return movies;
         } catch (JSONException e) {
