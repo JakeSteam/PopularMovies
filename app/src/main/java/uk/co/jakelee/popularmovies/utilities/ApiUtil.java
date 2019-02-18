@@ -10,7 +10,7 @@ import uk.co.jakelee.popularmovies.R;
 
 public class ApiUtil {
     private static final int TIMEOUT_SECONDS = 20;
-    public static OkHttpClient httpClient = new OkHttpClient.Builder()
+    public static final OkHttpClient httpClient = new OkHttpClient.Builder()
             .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
