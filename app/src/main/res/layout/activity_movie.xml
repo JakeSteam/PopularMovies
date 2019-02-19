@@ -13,67 +13,39 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:contentDescription="@string/poster_description" />
+            android:contentDescription="@string/poster_description"
+            android:scaleType="fitCenter" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/movie_title"
-            android:textStyle="bold"
-            android:padding="5dp"/>
+            style="@style/HeaderTextView"
+            android:text="@string/movie_title" />
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingBottom="10dp"
-            android:paddingRight="5dp"/>
+            style="@style/ContentTextView" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/movie_synopsis"
-            android:textStyle="bold"
-            android:padding="5dp"/>
+            style="@style/HeaderTextView"
+            android:text="@string/movie_synopsis" />
 
         <TextView
             android:id="@+id/synopsis"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingBottom="10dp"
-            android:paddingRight="5dp"/>
+            style="@style/ContentTextView" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/movie_release_date"
-            android:textStyle="bold"
-            android:padding="5dp"/>
+            style="@style/HeaderTextView"
+            android:text="@string/movie_release_date" />
 
         <TextView
             android:id="@+id/release_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingBottom="10dp"
-            android:paddingRight="5dp"/>
+            style="@style/ContentTextView" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/movie_average_vote"
-            android:textStyle="bold"
-            android:padding="5dp"/>
+            style="@style/HeaderTextView"
+            android:text="@string/movie_average_vote" />
 
         <TextView
             android:id="@+id/average_vote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingBottom="10dp"
-            android:paddingRight="5dp"/>
+            style="@style/ContentTextView" />
     </LinearLayout>
 </ScrollView>
