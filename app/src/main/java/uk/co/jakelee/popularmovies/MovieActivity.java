@@ -21,7 +21,7 @@ public class MovieActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            Movie movie = (Movie) extras.getSerializable(MovieActivity.MOVIE);
+            Movie movie = extras.getParcelable(MovieActivity.MOVIE);
             if (movie != null) {
                 populateUI(movie);
                 setTitle(movie.getTitle());

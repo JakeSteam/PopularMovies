@@ -42,7 +42,7 @@ public class ImageGridAdapter extends RecyclerView.Adapter<ImageGridAdapter.Movi
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(MovieActivity.MOVIE, movie);
+                bundle.putParcelable(MovieActivity.MOVIE, movie);
 
                 Intent intent = new Intent(v.getContext(), MovieActivity.class);
                 intent.putExtras(bundle);
