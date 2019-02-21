@@ -1,8 +1,8 @@
-<vector android:height="750dp" android:tint="#FFFFFF"
+<vector android:height="300dp" android:tint="#FFFFFF"
     android:viewportHeight="24.0" android:viewportWidth="24.0"
-    android:width="500dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    android:width="200dp" xmlns:android="http://schemas.android.com/apk/res/android">
     <group
-        android:scaleX="1"
+        android:scaleX="0.99"
         android:scaleY="0.66"
         android:pivotX="12"
         android:pivotY="12">
