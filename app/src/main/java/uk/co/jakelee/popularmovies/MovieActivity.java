@@ -81,12 +81,13 @@ public class MovieActivity extends AppCompatActivity {
                     ErrorUtil.handleApiError(activity, response.message());
                     return;
                 }
-                final String responseString = response.body().string();
+                String responseString = response.body().string();
+                List<Trailer> trailers = JsonUtil.parseTrailersJson(responseString);
+                final TrailerAdapter trailerAdapter = new TrailerAdapter(trailers);
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        List<Trailer> trailers = JsonUtil.parseTrailersJson(responseString);
-                        recyclerView.swapAdapter(new TrailerAdapter(trailers), false);
+                        recyclerView.swapAdapter(trailerAdapter, false);
                     }
                 });
             }
@@ -109,12 +110,13 @@ public class MovieActivity extends AppCompatActivity {
                     ErrorUtil.handleApiError(activity, response.message());
                     return;
                 }
-                final String responseString = response.body().string();
+                String responseString = response.body().string();
+                List<Review> reviews = JsonUtil.parseReviewsJson(responseString);
+                final ReviewAdapter reviewAdapter = new ReviewAdapter(reviews);
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        List<Review> reviews = JsonUtil.parseReviewsJson(responseString);
-                        recyclerView.swapAdapter(new ReviewAdapter(reviews), false);
+                        recyclerView.swapAdapter(reviewAdapter, false);
                     }
                 });
             }

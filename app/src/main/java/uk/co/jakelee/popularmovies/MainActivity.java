@@ -72,7 +72,9 @@ public class MainActivity extends AppCompatActivity {
                     ErrorUtil.handleApiError(activity, response.message());
                     return;
                 }
-                final String responseString = response.body().string();
+                String responseString = response.body().string();
+                List<Movie> movies = JsonUtil.parseMoviesJson(responseString);
+                final MovieAdapter movieAdapter = new MovieAdapter(movies);
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -81,8 +83,7 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             activity.setTitle(activity.getString(R.string.top_rated_films));
                         }
-                        List<Movie> movies = JsonUtil.parseMoviesJson(responseString);
-                        recyclerView.swapAdapter(new MovieAdapter(movies), false);
+                        recyclerView.swapAdapter(movieAdapter, false);
                     }
                 });
             }
