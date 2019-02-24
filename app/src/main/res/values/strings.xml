@@ -2,7 +2,9 @@
     <string name="app_name">Jake\'s Movies</string>
     <string name="popular_films">Popular Films</string>
     <string name="top_rated_films">Top Rated Films</string>
-    <string name="api_url">http://api.themoviedb.org/3/movie/%1$s?api_key=%2$s</string>
+    <string name="api_url_listings">http://api.themoviedb.org/3/movie/%1$s?api_key=%2$s</string>
+    <string name="api_url_trailers">http://api.themoviedb.org/3/movie/%1$d/videos?api_key=%2$s</string>
+    <string name="api_url_reviews">http://api.themoviedb.org/3/movie/%1$d/reviews?api_key=%2$s</string>
     <string name="poster_url">https://image.tmdb.org/t/p/w500%s</string>
     <string name="api_url_part_popular">popular</string>
     <string name="api_url_part_top_rated">top_rated</string>

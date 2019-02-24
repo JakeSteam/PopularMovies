@@ -17,9 +17,17 @@ public class ApiUtil {
             .retryOnConnectionFailure(false)
             .build();
 
-    public static String getApiUrl(Context context, Boolean usePopular) {
+    public static String getMoviesUrl(Context context, Boolean usePopular) {
         final String urlPart = context.getString(usePopular ? R.string.api_url_part_popular : R.string.api_url_part_top_rated);
-        return String.format(context.getString(R.string.api_url), urlPart, BuildConfig.API_KEY);
+        return String.format(context.getString(R.string.api_url_listings), urlPart, BuildConfig.API_KEY);
+    }
+
+    public static String getTrailersUrl(Context context, int movieId) {
+        return String.format(context.getString(R.string.api_url_trailers), movieId, BuildConfig.API_KEY);
+    }
+
+    public static String getReviewsUrl(Context context, int movieId) {
+        return String.format(context.getString(R.string.api_url_reviews), movieId, BuildConfig.API_KEY);
     }
 
     public static String getPosterUrl(Context context,  String suffix) {

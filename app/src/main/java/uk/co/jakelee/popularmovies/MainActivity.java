@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +18,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import uk.co.jakelee.popularmovies.model.Movie;
 import uk.co.jakelee.popularmovies.utilities.ApiUtil;
+import uk.co.jakelee.popularmovies.utilities.ErrorUtil;
 import uk.co.jakelee.popularmovies.utilities.JsonUtil;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,18 +57,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void getApiResponse(final Activity activity, final RecyclerView recyclerView, final Boolean popular) {
         Request request = new Request.Builder()
-                .url(ApiUtil.getApiUrl(activity, popular))
+                .url(ApiUtil.getMoviesUrl(activity, popular))
                 .build();
         ApiUtil.httpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                handleApiError(activity, e.getMessage());
+                ErrorUtil.handleApiError(activity, e.getMessage());
             }
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
                 if (!response.isSuccessful() || response.body() == null) {
-                    handleApiError(activity, response.message());
+                    ErrorUtil.handleApiError(activity, response.message());
                     return;
                 }
                 final String responseString = response.body().string();
@@ -88,12 +88,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private static void handleApiError(final Activity activity, final String error) {
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(activity, error, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 }
