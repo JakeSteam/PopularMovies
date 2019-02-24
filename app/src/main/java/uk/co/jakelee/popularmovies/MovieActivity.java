@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -86,7 +87,11 @@ public class MovieActivity extends AppCompatActivity {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        recyclerView.swapAdapter(trailerAdapter, false);
+                        if (trailerAdapter.getItemCount() > 0) {
+                            recyclerView.swapAdapter(trailerAdapter, false);
+                        } else {
+                            findViewById(R.id.trailerGroup).setVisibility(View.GONE);
+                        }
                     }
                 });
             }
@@ -115,7 +120,11 @@ public class MovieActivity extends AppCompatActivity {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        recyclerView.swapAdapter(reviewAdapter, false);
+                        if (reviewAdapter.getItemCount() > 0) {
+                            recyclerView.swapAdapter(reviewAdapter, false);
+                        } else {
+                            findViewById(R.id.reviewGroup).setVisibility(View.GONE);
+                        }
                     }
                 });
             }

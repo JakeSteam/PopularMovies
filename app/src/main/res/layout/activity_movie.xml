@@ -56,6 +56,12 @@
             app:layout_constraintTop_toBottomOf="@id/moviePoster"
             tools:text="It's a film"/>
 
+        <android.support.constraint.Group
+            android:id="@+id/trailerGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="trailerDivider, trailerTitle, trailerList"/>
+
         <ImageView
             android:id="@+id/trailerDivider"
             style="@style/Divider"
@@ -77,6 +83,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/trailerTitle"/>
+
+        <android.support.constraint.Group
+            android:id="@+id/reviewGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="reviewDivider, reviewTitle, reviewList"/>
 
         <ImageView
             android:id="@+id/reviewDivider"
