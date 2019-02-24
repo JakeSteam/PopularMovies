@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import uk.co.jakelee.popularmovies.R;
 import uk.co.jakelee.popularmovies.model.Trailer;
 
 public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.TrailerViewHolder> {

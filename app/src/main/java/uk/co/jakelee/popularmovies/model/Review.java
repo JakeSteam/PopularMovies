@@ -1,19 +1,27 @@
 package uk.co.jakelee.popularmovies.model;
 
 public class Review {
+    private String id;
     private String author;
     private String content;
-    private String id;
     private String url;
 
     public Review() {
     }
 
-    public Review(String author, String content, String id, String url) {
+    public Review(String id, String author, String content, String url) {
+        this.id = id;
         this.author = author;
         this.content = content;
-        this.id = id;
         this.url = url;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAuthor() {
@@ -30,14 +38,6 @@ public class Review {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getUrl() {

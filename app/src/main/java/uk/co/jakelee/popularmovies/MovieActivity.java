@@ -53,7 +53,6 @@ public class MovieActivity extends AppCompatActivity {
         Picasso.get()
                 .load(ApiUtil.getPosterUrl(this, movie.getPoster()))
                 .into((ImageView) findViewById(R.id.movie_poster));
-        ((TextView) findViewById(R.id.title)).setText(movie.getTitle());
         ((TextView) findViewById(R.id.synopsis)).setText(movie.getSynopsis());
         ((TextView) findViewById(R.id.release_date)).setText(movie.getReleaseDate());
         ((TextView) findViewById(R.id.average_vote)).setText(String.format(

@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import uk.co.jakelee.popularmovies.MovieActivity;
+import uk.co.jakelee.popularmovies.R;
 import uk.co.jakelee.popularmovies.model.Movie;
 import uk.co.jakelee.popularmovies.utilities.ApiUtil;
 
@@ -28,7 +29,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_griditem, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie, parent, false);
 
         return new MovieViewHolder(itemView);
     }
