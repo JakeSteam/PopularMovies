@@ -34,6 +34,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
         final Review review = reviewList.get(position);
         holder.authorView.setText(review.getAuthor());
+        holder.reviewView.setText(review.getContent());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,10 +51,12 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
     static class ReviewViewHolder extends RecyclerView.ViewHolder {
         final TextView authorView;
+        final TextView reviewView;
 
         ReviewViewHolder(View view) {
             super(view);
             authorView = view.findViewById(R.id.reviewAuthor);
+            reviewView = view.findViewById(R.id.reviewBody);
         }
     }
 }

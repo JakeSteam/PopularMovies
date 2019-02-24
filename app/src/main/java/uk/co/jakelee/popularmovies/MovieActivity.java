@@ -52,12 +52,15 @@ public class MovieActivity extends AppCompatActivity {
     private void populateUI(Movie movie) {
         Picasso.get()
                 .load(ApiUtil.getPosterUrl(this, movie.getPoster()))
-                .into((ImageView) findViewById(R.id.movie_poster));
+                .into((ImageView) findViewById(R.id.moviePoster));
         ((TextView) findViewById(R.id.synopsis)).setText(movie.getSynopsis());
-        ((TextView) findViewById(R.id.release_date)).setText(movie.getReleaseDate());
-        ((TextView) findViewById(R.id.average_vote)).setText(String.format(
-                getString(R.string.average_vote_format),
-                movie.getVoteAverage()));
+        ((TextView) findViewById(R.id.releaseDate)).setText(String.format(
+                getString(R.string.release_date),
+                movie.getReleaseDate()));
+        ((TextView) findViewById(R.id.voteInfo)).setText(String.format(
+                getString(R.string.vote_info),
+                movie.getVoteAverage(),
+                movie.getVoteCount()));
     }
 
     private void getTrailers(final Activity activity, final RecyclerView recyclerView, final int movieId) {

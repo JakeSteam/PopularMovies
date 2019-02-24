@@ -9,10 +9,7 @@
     <string name="api_url_part_popular">popular</string>
     <string name="api_url_part_top_rated">top_rated</string>
     <string name="poster_description">Movie poster</string>
-    <string name="movie_title">Title:</string>
-    <string name="movie_synopsis">Synopsis:</string>
-    <string name="movie_release_date">Release Date:</string>
-    <string name="movie_average_vote">Average Vote:</string>
-    <string name="average_vote_format">%.1f / 10</string>
-    <string name="youtube_url">https://youtube.com/?v=%1$s</string>
+    <string name="release_date">Released: %1$s</string>
+    <string name="vote_info">%.1f / 10 (%2$d votes cast)</string>
+    <string name="youtube_url">https://youtube.com/watch?v=%1$s</string>
 </resources>

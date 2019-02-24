@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/movie_poster"
+            android:id="@+id/moviePoster"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
@@ -21,33 +21,33 @@
             tools:src="@drawable/ic_loading"/>
 
         <TextView
-            android:id="@+id/release_date"
+            android:id="@+id/releaseDate"
             style="@style/ContentTextView"
-            app:layout_constraintStart_toEndOf="@id/movie_poster"
+            app:layout_constraintStart_toEndOf="@id/moviePoster"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="My Movie Title"/>
+            tools:text="Released 2019-01-01"/>
 
         <TextView
-            android:id="@+id/average_vote"
+            android:id="@+id/voteInfo"
             style="@style/ContentTextView"
-            app:layout_constraintStart_toEndOf="@id/movie_poster"
-            app:layout_constraintTop_toBottomOf="@id/release_date"
+            app:layout_constraintStart_toEndOf="@id/moviePoster"
+            app:layout_constraintTop_toBottomOf="@id/releaseDate"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="5.5/10"/>
+            tools:text="5.5 / 10 (5,432 votes)"/>
 
         <TextView
             android:id="@+id/synopsis"
             style="@style/ContentTextView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/movie_poster"
+            app:layout_constraintTop_toBottomOf="@id/moviePoster"
             tools:text="It's a film"/>
 
         <ImageView
             android:id="@+id/trailerDivider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
             app:layout_constraintTop_toBottomOf="@id/synopsis"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,8 +55,6 @@
 
         <TextView
             android:id="@+id/trailerTitle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             style="@style/HeaderTextView"
             android:text="Trailers:"
             app:layout_constraintTop_toBottomOf="@id/trailerDivider"/>
@@ -73,7 +71,7 @@
         <ImageView
             android:id="@+id/reviewDivider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
             app:layout_constraintTop_toBottomOf="@id/trailerList"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,8 +79,6 @@
 
         <TextView
             android:id="@+id/reviewTitle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             style="@style/HeaderTextView"
             android:text="Reviews:"
             app:layout_constraintTop_toBottomOf="@id/reviewDivider"/>
