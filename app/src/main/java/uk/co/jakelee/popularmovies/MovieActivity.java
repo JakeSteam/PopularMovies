@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -61,6 +62,7 @@ public class MovieActivity extends AppCompatActivity {
                 getString(R.string.vote_info),
                 movie.getVoteAverage(),
                 movie.getVoteCount()));
+        updateFavouriteButton(true);
     }
 
     private void getTrailers(final Activity activity, final RecyclerView recyclerView, final int movieId) {
@@ -117,5 +119,14 @@ public class MovieActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void updateFavouriteButton(Boolean isInFavourites) {
+        Button favouriteButton = findViewById(R.id.favouriteButton);
+        if (isInFavourites) {
+            favouriteButton.setText(getString(R.string.remove_from_favourites));
+        } else {
+            favouriteButton.setText(getString(R.string.add_to_favourites));
+        }
     }
 }

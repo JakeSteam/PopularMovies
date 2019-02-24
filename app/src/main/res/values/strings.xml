@@ -12,4 +12,8 @@
     <string name="release_date">Released: %1$s</string>
     <string name="vote_info">%.1f / 10 (%2$d votes cast)</string>
     <string name="youtube_url">https://youtube.com/watch?v=%1$s</string>
+    <string name="trailers">Trailers:</string>
+    <string name="reviews">Reviews:</string>
+    <string name="add_to_favourites">Favourite</string>
+    <string name="remove_from_favourites">Unfavourite</string>
 </resources>

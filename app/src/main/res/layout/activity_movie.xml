@@ -11,7 +11,7 @@
 
         <ImageView
             android:id="@+id/moviePoster"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:contentDescription="@string/poster_description"
@@ -36,6 +36,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="5.5 / 10 (5,432 votes)"/>
 
+        <Button
+            android:id="@+id/favouriteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/moviePoster"
+            app:layout_constraintTop_toBottomOf="@id/voteInfo"
+            android:background="@color/colorPrimary"
+            android:textColor="#FFFFFF"
+            android:padding="12dp"
+            android:layout_marginStart="8dp"
+            tools:text="@string/remove_from_favourites" />
+
         <TextView
             android:id="@+id/synopsis"
             style="@style/ContentTextView"
@@ -46,17 +58,15 @@
 
         <ImageView
             android:id="@+id/trailerDivider"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            style="@style/Divider"
             app:layout_constraintTop_toBottomOf="@id/synopsis"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:src="@color/colorPrimary"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:id="@+id/trailerTitle"
             style="@style/HeaderTextView"
-            android:text="Trailers:"
+            android:text="@string/trailers"
             app:layout_constraintTop_toBottomOf="@id/trailerDivider"/>
 
         <android.support.v7.widget.RecyclerView
@@ -70,17 +80,15 @@
 
         <ImageView
             android:id="@+id/reviewDivider"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            style="@style/Divider"
             app:layout_constraintTop_toBottomOf="@id/trailerList"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:src="@color/colorPrimary"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:id="@+id/reviewTitle"
             style="@style/HeaderTextView"
-            android:text="Reviews:"
+            android:text="@string/reviews"
             app:layout_constraintTop_toBottomOf="@id/reviewDivider"/>
 
         <android.support.v7.widget.RecyclerView
