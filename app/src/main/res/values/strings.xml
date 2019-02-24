@@ -14,4 +14,5 @@
     <string name="movie_release_date">Release Date:</string>
     <string name="movie_average_vote">Average Vote:</string>
     <string name="average_vote_format">%.1f / 10</string>
+    <string name="youtube_url">https://youtube.com/?v=%1$s</string>
 </resources>

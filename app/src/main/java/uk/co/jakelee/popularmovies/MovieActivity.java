@@ -17,7 +17,11 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
+import uk.co.jakelee.popularmovies.adapters.ReviewAdapter;
+import uk.co.jakelee.popularmovies.adapters.TrailerAdapter;
 import uk.co.jakelee.popularmovies.model.Movie;
+import uk.co.jakelee.popularmovies.model.Review;
+import uk.co.jakelee.popularmovies.model.Trailer;
 import uk.co.jakelee.popularmovies.utilities.ApiUtil;
 import uk.co.jakelee.popularmovies.utilities.ErrorUtil;
 import uk.co.jakelee.popularmovies.utilities.JsonUtil;
@@ -35,8 +39,10 @@ public class MovieActivity extends AppCompatActivity {
         if (extras != null) {
             Movie movie = extras.getParcelable(MovieActivity.MOVIE);
             if (movie != null) {
-                populateUI(movie);
                 setTitle(movie.getTitle());
+                populateUI(movie);
+                getTrailers(this, (RecyclerView)findViewById(R.id.trailerList), movie.getId());
+                getReviews(this, (RecyclerView)findViewById(R.id.reviewList), movie.getId());
             }
         } else {
             finish();
@@ -55,9 +61,9 @@ public class MovieActivity extends AppCompatActivity {
                 movie.getVoteAverage()));
     }
 
-    private void getTrailer(final Activity activity, final RecyclerView recyclerView, final Boolean popular) {
+    private void getTrailers(final Activity activity, final RecyclerView recyclerView, final int movieId) {
         Request request = new Request.Builder()
-                .url(ApiUtil.getMoviesUrl(activity, popular))
+                .url(ApiUtil.getTrailersUrl(activity, movieId))
                 .build();
         ApiUtil.httpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -75,13 +81,36 @@ public class MovieActivity extends AppCompatActivity {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (popular) {
-                            activity.setTitle(activity.getString(R.string.popular_films));
-                        } else {
-                            activity.setTitle(activity.getString(R.string.top_rated_films));
-                        }
-                        List<Movie> movies = JsonUtil.parseMoviesJson(responseString);
-                        recyclerView.swapAdapter(new ImageGridAdapter(movies), false);
+                        List<Trailer> trailers = JsonUtil.parseTrailersJson(responseString);
+                        recyclerView.swapAdapter(new TrailerAdapter(trailers), false);
+                    }
+                });
+            }
+        });
+    }
+
+    private void getReviews(final Activity activity, final RecyclerView recyclerView, final int movieId) {
+        Request request = new Request.Builder()
+                .url(ApiUtil.getReviewsUrl(activity, movieId))
+                .build();
+        ApiUtil.httpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                ErrorUtil.handleApiError(activity, e.getMessage());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
+                if (!response.isSuccessful() || response.body() == null) {
+                    ErrorUtil.handleApiError(activity, response.message());
+                    return;
+                }
+                final String responseString = response.body().string();
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        List<Review> reviews = JsonUtil.parseReviewsJson(responseString);
+                        recyclerView.swapAdapter(new ReviewAdapter(reviews), false);
                     }
                 });
             }

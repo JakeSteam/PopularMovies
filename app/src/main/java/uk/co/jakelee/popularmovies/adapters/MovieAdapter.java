@@ -1,4 +1,4 @@
-package uk.co.jakelee.popularmovies;
+package uk.co.jakelee.popularmovies.adapters;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,14 +13,15 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import uk.co.jakelee.popularmovies.MovieActivity;
 import uk.co.jakelee.popularmovies.model.Movie;
 import uk.co.jakelee.popularmovies.utilities.ApiUtil;
 
-public class ImageGridAdapter extends RecyclerView.Adapter<ImageGridAdapter.MovieViewHolder> {
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private final List<Movie> movieList;
 
-    ImageGridAdapter(List<Movie> movieList) {
+    public MovieAdapter(List<Movie> movieList) {
         this.movieList = movieList;
     }
 

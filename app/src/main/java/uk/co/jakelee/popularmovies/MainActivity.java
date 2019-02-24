@@ -16,6 +16,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
+import uk.co.jakelee.popularmovies.adapters.MovieAdapter;
 import uk.co.jakelee.popularmovies.model.Movie;
 import uk.co.jakelee.popularmovies.utilities.ApiUtil;
 import uk.co.jakelee.popularmovies.utilities.ErrorUtil;
@@ -34,10 +35,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_popular:
-                getApiResponse(this, movieRecycler, true);
+                getMovies(this, movieRecycler, true);
                 break;
             case R.id.action_toprated:
-                getApiResponse(this, movieRecycler, false);
+                getMovies(this, movieRecycler, false);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -52,10 +53,10 @@ public class MainActivity extends AppCompatActivity {
         movieRecycler.setHasFixedSize(true);
         StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         movieRecycler.setLayoutManager(sglm);
-        getApiResponse(this, movieRecycler, true);
+        getMovies(this, movieRecycler, true);
     }
 
-    private void getApiResponse(final Activity activity, final RecyclerView recyclerView, final Boolean popular) {
+    private void getMovies(final Activity activity, final RecyclerView recyclerView, final Boolean popular) {
         Request request = new Request.Builder()
                 .url(ApiUtil.getMoviesUrl(activity, popular))
                 .build();
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                             activity.setTitle(activity.getString(R.string.top_rated_films));
                         }
                         List<Movie> movies = JsonUtil.parseMoviesJson(responseString);
-                        recyclerView.swapAdapter(new ImageGridAdapter(movies), false);
+                        recyclerView.swapAdapter(new MovieAdapter(movies), false);
                     }
                 });
             }
