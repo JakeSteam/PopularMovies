@@ -21,7 +21,6 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
-import uk.co.jakelee.popularmovies.adapters.MovieAdapter;
 import uk.co.jakelee.popularmovies.adapters.ReviewAdapter;
 import uk.co.jakelee.popularmovies.adapters.TrailerAdapter;
 import uk.co.jakelee.popularmovies.database.MovieRepository;
@@ -133,7 +132,7 @@ public class MovieActivity extends AppCompatActivity {
                     public void run() {
                         if (reviewAdapter.getItemCount() > 0) {
                             recyclerView.swapAdapter(reviewAdapter, false);
-                            findViewById(R.id.trailerGroup).setVisibility(View.VISIBLE);
+                            findViewById(R.id.reviewGroup).setVisibility(View.VISIBLE);
                         }
                     }
                 });
