@@ -1,6 +1,11 @@
 package uk.co.jakelee.popularmovies.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity
 public class Review {
+    @PrimaryKey
     private String id;
     private String author;
     private String content;

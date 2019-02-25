@@ -1,9 +1,13 @@
 package uk.co.jakelee.popularmovies.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+@Entity
 public class Movie implements Parcelable {
+    @PrimaryKey
     private Integer id;
     private String title;
     private String releaseDate;
