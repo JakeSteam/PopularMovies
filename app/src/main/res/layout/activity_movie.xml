@@ -60,6 +60,7 @@
             android:id="@+id/trailerGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:constraint_referenced_ids="trailerDivider, trailerTitle, trailerList"/>
 
         <ImageView
@@ -88,6 +89,7 @@
             android:id="@+id/reviewGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:constraint_referenced_ids="reviewDivider, reviewTitle, reviewList"/>
 
         <ImageView

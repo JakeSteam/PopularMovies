@@ -89,8 +89,7 @@ public class MovieActivity extends AppCompatActivity {
                     public void run() {
                         if (trailerAdapter.getItemCount() > 0) {
                             recyclerView.swapAdapter(trailerAdapter, false);
-                        } else {
-                            findViewById(R.id.trailerGroup).setVisibility(View.GONE);
+                            findViewById(R.id.trailerGroup).setVisibility(View.VISIBLE);
                         }
                     }
                 });
@@ -122,8 +121,7 @@ public class MovieActivity extends AppCompatActivity {
                     public void run() {
                         if (reviewAdapter.getItemCount() > 0) {
                             recyclerView.swapAdapter(reviewAdapter, false);
-                        } else {
-                            findViewById(R.id.reviewGroup).setVisibility(View.GONE);
+                            findViewById(R.id.trailerGroup).setVisibility(View.VISIBLE);
                         }
                     }
                 });
