@@ -39,6 +39,10 @@ public class MovieRepository {
         }.execute();
     }
 
+    public LiveData<Movie> fetchFavourite(int movieId) {
+        return movieDatabase.movieDao().fetchFavourite(movieId);
+    }
+
     public LiveData<List<Movie>> fetchFavourites() {
         return movieDatabase.movieDao().fetchFavourites();
     }

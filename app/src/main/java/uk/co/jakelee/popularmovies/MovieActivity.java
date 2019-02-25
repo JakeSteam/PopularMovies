@@ -1,8 +1,10 @@
 package uk.co.jakelee.popularmovies;
 
 import android.app.Activity;
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -19,6 +21,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
+import uk.co.jakelee.popularmovies.adapters.MovieAdapter;
 import uk.co.jakelee.popularmovies.adapters.ReviewAdapter;
 import uk.co.jakelee.popularmovies.adapters.TrailerAdapter;
 import uk.co.jakelee.popularmovies.database.MovieRepository;
@@ -51,7 +54,7 @@ public class MovieActivity extends AppCompatActivity {
         }
     }
 
-    private void populateUI(Movie movie) {
+    private void populateUI(final Movie movie) {
         Picasso.get()
                 .load(ApiUtil.getPosterUrl(this, movie.getPoster()))
                 .into((ImageView) findViewById(R.id.moviePoster));
@@ -63,7 +66,15 @@ public class MovieActivity extends AppCompatActivity {
                 getString(R.string.vote_info),
                 movie.getVoteAverage(),
                 movie.getVoteCount()));
-        updateFavouriteButton(movie, false);
+        MovieRepository movieRepository = new MovieRepository(this);
+        movieRepository.fetchFavourite(movie.getId()).observe(this, new Observer<Movie>() {
+            @Override
+            public void onChanged(@Nullable Movie savedMovie) {
+                Boolean isFavourite = savedMovie != null;
+                updateFavouriteButton(movie, isFavourite);
+                findViewById(R.id.favouriteButton).setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void getTrailers(final Activity activity, final RecyclerView recyclerView, final int movieId) {

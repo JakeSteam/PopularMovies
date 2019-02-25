@@ -46,7 +46,8 @@
             android:textColor="#FFFFFF"
             android:padding="12dp"
             android:layout_marginStart="8dp"
-            tools:text="@string/remove_from_favourites" />
+            tools:text="@string/remove_from_favourites"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/synopsis"
@@ -74,7 +75,8 @@
             android:id="@+id/trailerTitle"
             style="@style/HeaderTextView"
             android:text="@string/trailers"
-            app:layout_constraintTop_toBottomOf="@id/trailerDivider"/>
+            app:layout_constraintTop_toBottomOf="@id/trailerDivider"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/trailerList"

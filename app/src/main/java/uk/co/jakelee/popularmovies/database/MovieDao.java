@@ -18,6 +18,9 @@ public interface MovieDao {
     @Delete
     void deleteFavourite(Movie movie);
 
+    @Query("SELECT * FROM Movie WHERE id =:movieId")
+    LiveData<Movie> fetchFavourite(int movieId);
+
     @Query("SELECT * FROM Movie")
     LiveData<List<Movie>> fetchFavourites();
 }
