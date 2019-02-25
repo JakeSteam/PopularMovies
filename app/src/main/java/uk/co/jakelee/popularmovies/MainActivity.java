@@ -1,8 +1,10 @@
 package uk.co.jakelee.popularmovies;
 
 import android.app.Activity;
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -17,6 +19,7 @@ import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
 import uk.co.jakelee.popularmovies.adapters.MovieAdapter;
+import uk.co.jakelee.popularmovies.database.MovieRepository;
 import uk.co.jakelee.popularmovies.model.Movie;
 import uk.co.jakelee.popularmovies.utilities.ApiUtil;
 import uk.co.jakelee.popularmovies.utilities.ErrorUtil;
@@ -39,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.action_toprated:
                 getMovies(this, movieRecycler, false);
+                break;
+            case R.id.action_favourites:
+                getFavourites(this, movieRecycler);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -86,6 +92,17 @@ public class MainActivity extends AppCompatActivity {
                         recyclerView.swapAdapter(movieAdapter, false);
                     }
                 });
+            }
+        });
+    }
+
+    private void getFavourites(final Activity activity, final RecyclerView recyclerView) {
+        MovieRepository movieRepository = new MovieRepository(this);
+        movieRepository.fetchFavourites().observe(this, new Observer<List<Movie>>() {
+            @Override
+            public void onChanged(@Nullable List<Movie> movies) {
+                MovieAdapter movieAdapter = new MovieAdapter(movies);
+                recyclerView.swapAdapter(movieAdapter, false);
             }
         });
     }

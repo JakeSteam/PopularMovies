@@ -21,6 +21,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import uk.co.jakelee.popularmovies.adapters.ReviewAdapter;
 import uk.co.jakelee.popularmovies.adapters.TrailerAdapter;
+import uk.co.jakelee.popularmovies.database.MovieRepository;
 import uk.co.jakelee.popularmovies.model.Movie;
 import uk.co.jakelee.popularmovies.model.Review;
 import uk.co.jakelee.popularmovies.model.Trailer;
@@ -62,7 +63,7 @@ public class MovieActivity extends AppCompatActivity {
                 getString(R.string.vote_info),
                 movie.getVoteAverage(),
                 movie.getVoteCount()));
-        updateFavouriteButton(true);
+        updateFavouriteButton(movie, false);
     }
 
     private void getTrailers(final Activity activity, final RecyclerView recyclerView, final int movieId) {
@@ -129,12 +130,27 @@ public class MovieActivity extends AppCompatActivity {
         });
     }
 
-    private void updateFavouriteButton(Boolean isInFavourites) {
+    private void updateFavouriteButton(Movie movie, Boolean isInFavourites) {
         Button favouriteButton = findViewById(R.id.favouriteButton);
+        favouriteButton.setOnClickListener(favouriteClickListener(movie, isInFavourites));
         if (isInFavourites) {
             favouriteButton.setText(getString(R.string.remove_from_favourites));
         } else {
             favouriteButton.setText(getString(R.string.add_to_favourites));
         }
+    }
+
+    private View.OnClickListener favouriteClickListener(final Movie movie, final Boolean isInFavourites) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MovieRepository movieRepository = new MovieRepository(v.getContext());
+                if (isInFavourites) {
+                    movieRepository.deleteFavourite(movie);
+                } else {
+                    movieRepository.insertFavourite(movie);
+                }
+            }
+        };
     }
 }
