@@ -150,6 +150,7 @@ public class MovieActivity extends AppCompatActivity {
                 } else {
                     movieRepository.insertFavourite(movie);
                 }
+                updateFavouriteButton(movie, !isInFavourites);
             }
         };
     }

@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<Movie> movies) {
                 MovieAdapter movieAdapter = new MovieAdapter(movies);
+                activity.setTitle(R.string.favourite_films);
                 recyclerView.swapAdapter(movieAdapter, false);
             }
         });
