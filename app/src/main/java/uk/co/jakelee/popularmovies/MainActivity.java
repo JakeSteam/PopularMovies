@@ -1,53 +1,27 @@
 package uk.co.jakelee.popularmovies;
 
-import android.app.Activity;
-import android.arch.lifecycle.Observer;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.io.IOException;
-import java.util.List;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Request;
-import okhttp3.Response;
-import uk.co.jakelee.popularmovies.adapters.MovieAdapter;
-import uk.co.jakelee.popularmovies.database.MovieRepository;
-import uk.co.jakelee.popularmovies.model.Movie;
-import uk.co.jakelee.popularmovies.utilities.ApiUtil;
-import uk.co.jakelee.popularmovies.utilities.ErrorUtil;
-import uk.co.jakelee.popularmovies.utilities.JsonUtil;
+import uk.co.jakelee.popularmovies.utilities.ApiWrapperUtil;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView movieRecycler;
+    private int selectedItem = R.id.action_popular;
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putInt("selectedItem", selectedItem);
+        super.onSaveInstanceState(savedInstanceState);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_popular:
-                getMovies(this, movieRecycler, true);
-                break;
-            case R.id.action_toprated:
-                getMovies(this, movieRecycler, false);
-                break;
-            case R.id.action_favourites:
-                getFavourites(this, movieRecycler);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        changeTab(savedInstanceState.getInt("selectedItem"));
     }
 
     @Override
@@ -59,53 +33,39 @@ public class MainActivity extends AppCompatActivity {
         movieRecycler.setHasFixedSize(true);
         StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         movieRecycler.setLayoutManager(sglm);
-        getMovies(this, movieRecycler, true);
+
+        if (savedInstanceState != null) {
+            changeTab(savedInstanceState.getInt("selectedItem"));
+        } else {
+            ApiWrapperUtil.getMovies(this, movieRecycler, true);
+        }
     }
 
-    private void getMovies(final Activity activity, final RecyclerView recyclerView, final Boolean popular) {
-        Request request = new Request.Builder()
-                .url(ApiUtil.getMoviesUrl(activity, popular))
-                .build();
-        new ApiUtil().httpClient(activity).newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                ErrorUtil.handleApiError(activity, e.getMessage());
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
-                if (!response.isSuccessful() || response.body() == null) {
-                    ErrorUtil.handleApiError(activity, response.message());
-                    return;
-                }
-                String responseString = response.body().string();
-                List<Movie> movies = JsonUtil.parseMoviesJson(responseString);
-                final MovieAdapter movieAdapter = new MovieAdapter(movies);
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (popular) {
-                            activity.setTitle(activity.getString(R.string.popular_films));
-                        } else {
-                            activity.setTitle(activity.getString(R.string.top_rated_films));
-                        }
-                        recyclerView.swapAdapter(movieAdapter, false);
-                    }
-                });
-            }
-        });
+    private void changeTab(int item) {
+        switch (item) {
+            case R.id.action_popular:
+                ApiWrapperUtil.getMovies(this, movieRecycler, true);
+                break;
+            case R.id.action_toprated:
+                ApiWrapperUtil.getMovies(this, movieRecycler, false);
+                break;
+            case R.id.action_favourites:
+                ApiWrapperUtil.getFavourites(this, movieRecycler);
+                break;
+        }
+        selectedItem = item;
     }
 
-    private void getFavourites(final Activity activity, final RecyclerView recyclerView) {
-        MovieRepository movieRepository = new MovieRepository(this);
-        movieRepository.fetchFavourites().observe(this, new Observer<List<Movie>>() {
-            @Override
-            public void onChanged(@Nullable List<Movie> movies) {
-                MovieAdapter movieAdapter = new MovieAdapter(movies);
-                activity.setTitle(R.string.favourite_films);
-                recyclerView.swapAdapter(movieAdapter, false);
-            }
-        });
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        changeTab(item.getItemId());
+        return super.onOptionsItemSelected(item);
     }
 
 }
