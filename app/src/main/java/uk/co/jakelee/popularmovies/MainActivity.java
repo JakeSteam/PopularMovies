@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         Request request = new Request.Builder()
                 .url(ApiUtil.getMoviesUrl(activity, popular))
                 .build();
-        ApiUtil.httpClient.newCall(request).enqueue(new Callback() {
+        new ApiUtil().httpClient(activity).newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 ErrorUtil.handleApiError(activity, e.getMessage());

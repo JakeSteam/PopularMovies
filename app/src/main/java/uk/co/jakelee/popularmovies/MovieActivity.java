@@ -80,7 +80,7 @@ public class MovieActivity extends AppCompatActivity {
         Request request = new Request.Builder()
                 .url(ApiUtil.getTrailersUrl(activity, movieId))
                 .build();
-        ApiUtil.httpClient.newCall(request).enqueue(new Callback() {
+        new ApiUtil().httpClient(activity).newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 ErrorUtil.handleApiError(activity, e.getMessage());
@@ -112,7 +112,7 @@ public class MovieActivity extends AppCompatActivity {
         Request request = new Request.Builder()
                 .url(ApiUtil.getReviewsUrl(activity, movieId))
                 .build();
-        ApiUtil.httpClient.newCall(request).enqueue(new Callback() {
+        new ApiUtil().httpClient(activity).newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 ErrorUtil.handleApiError(activity, e.getMessage());
