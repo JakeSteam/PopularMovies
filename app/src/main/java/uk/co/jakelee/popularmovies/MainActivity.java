@@ -12,17 +12,7 @@ import uk.co.jakelee.popularmovies.utilities.ApiWrapperUtil;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView movieRecycler;
     private int selectedItem = R.id.action_popular;
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putInt("selectedItem", selectedItem);
-        super.onSaveInstanceState(savedInstanceState);
-    }
-
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        changeTab(savedInstanceState.getInt("selectedItem"));
-    }
+    private final String SELECTED_KEY = "uk.co.jakelee.popularmovies.selected";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
         movieRecycler.setLayoutManager(sglm);
 
         if (savedInstanceState != null) {
-            changeTab(savedInstanceState.getInt("selectedItem"));
+            changeTab(savedInstanceState.getInt(SELECTED_KEY, selectedItem));
         } else {
-            ApiWrapperUtil.getMovies(this, movieRecycler, true);
+            changeTab(selectedItem);
         }
     }
 
@@ -57,6 +47,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putInt(SELECTED_KEY, selectedItem);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        changeTab(savedInstanceState.getInt(SELECTED_KEY));
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
@@ -67,5 +69,4 @@ public class MainActivity extends AppCompatActivity {
         changeTab(item.getItemId());
         return super.onOptionsItemSelected(item);
     }
-
 }

@@ -54,7 +54,7 @@ public class ApiUtil {
         public Response intercept(Chain chain) throws IOException {
             Response response = chain.proceed(chain.request());
             CacheControl cacheControl = new CacheControl.Builder()
-                    .maxAge(15, TimeUnit.MINUTES) // 15 minutes cache
+                    .maxAge(1, TimeUnit.HOURS) // 15 minutes cache
                     .build();
             return response.newBuilder()
                     .removeHeader("Pragma")
