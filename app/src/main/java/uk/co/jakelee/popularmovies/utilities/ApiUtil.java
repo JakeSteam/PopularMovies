@@ -32,7 +32,7 @@ public class ApiUtil {
                 .build();
     }
 
-    public static String getMoviesUrl(Context context, Boolean usePopular) {
+    static String getMoviesUrl(Context context, Boolean usePopular) {
         final String urlPart = context.getString(usePopular ? R.string.api_url_part_popular : R.string.api_url_part_top_rated);
         return String.format(context.getString(R.string.api_url_listings), urlPart, BuildConfig.API_KEY);
     }

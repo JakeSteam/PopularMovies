@@ -13,7 +13,7 @@ import uk.co.jakelee.popularmovies.model.Trailer;
 
 public class JsonUtil {
 
-    public static List<Movie> parseMoviesJson(String json) {
+    static List<Movie> parseMoviesJson(String json) {
         String RESULTS_ARRAY = "results";
         String MOVIE_IS_ADULT = "adult";
         String MOVIE_ID = "id";

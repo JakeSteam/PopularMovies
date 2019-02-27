@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 
 import java.util.List;
 
-import uk.co.jakelee.popularmovies.MovieDatabase;
 import uk.co.jakelee.popularmovies.model.Movie;
 
 public class MovieRepository {
