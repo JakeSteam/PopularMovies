@@ -7,18 +7,21 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import uk.co.jakelee.popularmovies.database.MovieRepository;
 import uk.co.jakelee.popularmovies.utilities.ApiWrapperUtil;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView movieRecycler;
     private int selectedItem = R.id.action_popular;
     private final String SELECTED_KEY = "uk.co.jakelee.popularmovies.selected";
+    private MovieRepository movieRepo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        movieRepo = new MovieRepository(this);
         movieRecycler = findViewById(R.id.movieRecycler);
         movieRecycler.setHasFixedSize(true);
         StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 ApiWrapperUtil.getMovies(this, movieRecycler, false);
                 break;
             case R.id.action_favourites:
-                ApiWrapperUtil.getFavourites(this, movieRecycler);
+                ApiWrapperUtil.getFavourites(this, movieRepo, movieRecycler);
                 break;
         }
         selectedItem = item;

@@ -54,9 +54,8 @@ public class ApiWrapperUtil {
         });
     }
 
-    public static void getFavourites(final Activity activity, final RecyclerView recyclerView) {
-        MovieRepository movieRepository = new MovieRepository(activity);
-        movieRepository.fetchFavourites().observe((LifecycleOwner)activity, new Observer<List<Movie>>() {
+    public static void getFavourites(final Activity activity, MovieRepository movieRepo, final RecyclerView recyclerView) {
+        movieRepo.fetchFavourites().observe((LifecycleOwner)activity, new Observer<List<Movie>>() {
             @Override
             public void onChanged(@Nullable List<Movie> movies) {
                 MovieAdapter movieAdapter = new MovieAdapter(movies);
